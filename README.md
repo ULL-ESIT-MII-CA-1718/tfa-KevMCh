@@ -1,4 +1,4 @@
-== Final Project
+## Final Project
 
 ### Personal Data
 * *[My GitHub Page](https://kevmch.github.io/)*

@@ -1,0 +1,30 @@
+{
+  "name": "tfa-kevmch",
+  "version": "0.0.0",
+  "description": "Final project",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-MII-CA-1718/tfa-KevMCh.git"
+  },
+  "author": "Kevin Martín Chinea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-MII-CA-1718/tfa-KevMCh/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-MII-CA-1718/tfa-KevMCh#readme",
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {}
+}
