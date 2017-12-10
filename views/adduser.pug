@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h2 Nuevo usuario
+
+  #addUser
+    input#inputUser(type='text', placeholder='Usuario')
+    br
+    input#inputPassword(type='text', placeholder='Contraseña')
+    br
+    select#inputRol
+      option(value="") Seleccione un valor
+      each rol in roles
+        option(value=rol) #{rol}
+    br
+    br
+    button#btnAddUser Añadir usuario

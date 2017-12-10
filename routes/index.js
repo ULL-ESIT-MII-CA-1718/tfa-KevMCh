@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* View to add a user */
+router.get('/adduser', function(req, res, next) {
+  res.render('adduser', { roles: {adm: 'Administrador', col: 'Colegial'} });
+});
+
 module.exports = router;
