@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  #userInfo
+    h2 User Info
+    p
+      strong Name:
+      |  <span id='user'></span>
+      br
+      strong Password:
+      |  <span id='password'></span>
+      br
+      strong Rol:
+      |  <span id='rol'></span>
+
+  #userList
+    h2 User List
+    table
+      thead
+        th User
+        th Rol
+      tbody

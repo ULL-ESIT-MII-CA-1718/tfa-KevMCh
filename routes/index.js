@@ -6,7 +6,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* View to add a user */
+/* GET users list page. */
+router.get('/userslist', function(req, res, next) {
+  res.render('userslist', { title: 'Express' });
+});
+
+/* GET add a user page. */
 router.get('/adduser', function(req, res, next) {
   res.render('adduser', { roles: {adm: 'Administrador', col: 'Colegial'} });
 });
