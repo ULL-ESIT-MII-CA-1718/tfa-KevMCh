@@ -22,6 +22,7 @@ function fillTable() {
       tableContent += '<tr>';
       tableContent += '<td><a href="#" class="showuser" rel="' + this._id + '">' + this.user + '</a></td>';
       tableContent += '<td>' + this.rol + '</td>';
+      tableContent += '<td><a class="deleteuser" rel="' + this._id + '">delete</a></td>';
       tableContent += '</tr>';
     });
 
@@ -54,3 +55,38 @@ function showUserInfo(event) {
 
 // Username link click
 $('#userList table tbody').on('click', 'td a.showuser', showUserInfo);
+
+// Delete User
+function deleteUser(event) {
+  event.preventDefault();
+
+  // Pop up a confirmation dialog
+  var confirmation = confirm('¿Seguro qué quieres eliminar este usuario?');
+
+  // Check and make sure the user confirmed
+  if (confirmation === true) {
+
+    // If they did, do our delete
+    $.ajax({
+      type: 'DELETE',
+      url: '/users/delete/' + $(this).attr('rel')
+    }).done(function( response ) {
+
+      // Check for a successful (blank) response
+      if (response.msg === '') {
+
+      } else {
+        alert('Error: ' + response.msg);
+      }
+
+      // Update the table
+      fillTable();
+    });
+  } else {
+    // If they said no to the confirm, do nothing
+    return false;
+  }
+};
+
+// Delete User link click
+$('#userList table tbody').on('click', 'td a.deleteuser', deleteUser);
