@@ -16,6 +16,18 @@ router.get('/', function(req, res) {
     });
 });
 
+/* GET a specific user */
+router.get('/:id', function(req, res) {
+  var userToFind = req.params.id;
+  User.findOne({ '_id' : userToFind }).
+    populate('rol').
+    exec(function (err, user) {
+      if (err) return next(err);
+
+      res.json(user);
+    });
+});
+
 /* POST to add a user. */
 router.post('/add', function(req, res) {
   Rol.findOne({ _id: req.body.rol }, function (err, rol) {

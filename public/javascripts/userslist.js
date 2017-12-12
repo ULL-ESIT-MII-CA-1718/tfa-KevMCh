@@ -33,24 +33,15 @@ function fillTable() {
 
 // Show User Info
 function showUserInfo(event) {
-  // Prevent Link from Firing
-  event.preventDefault();
-
-  // Retrieve user id from link rel attribute
-  var idUser = $(this).attr('rel');
-
-  // Get Index of object based on id value
-  var arrayPosition = userListData.map(function(arrayItem) {
-    return arrayItem._id;
-  }).indexOf(idUser);
-
-  // Get our User Object
-  var thisUser = userListData[arrayPosition];
-
-  //Populate Info Box
-  $('#user').text(thisUser.user);
-  $('#password').text(thisUser.password);
-  $('#rol').text(thisUser.rol.name);
+  // jQuery AJAX call for get the user
+  $.ajax({
+    type: 'GET',
+    url: 'users/' + $(this).attr('rel')
+  }).done(function(response) {
+    $('#user').text(response.user);
+    $('#password').text(response.password);
+    $('#rol').text(response.rol.name);
+  });
 };
 
 // Username link click
