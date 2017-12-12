@@ -5,7 +5,7 @@ var userSchema = Schema({
   _id: Schema.Types.ObjectId,
   user: String,
   password: String,
-  rol: { type: Schema.Types.ObjectId, ref: 'rol' }
+  rol: { type: Schema.Types.ObjectId, ref: 'Rol' }
 });
 
 var User = mongoose.model('User', userSchema);

@@ -1,18 +1,14 @@
+var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
 var User = require('../models/User.js')
 var Rol = require('../models/Rol.js');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-/* GET users list page. */
-router.get('/userslist', function(req, res, next) {
+/* GET users list. */
+router.get('/', function(req, res) {
   User.find().
-    populate('Rol').
+    populate('rol').
     exec(function (err, rol) {
       if (err) return next(err);
 
@@ -26,7 +22,7 @@ router.post('/add', function(req, res) {
     if (err) return next(err);
 
     var newUser = new User ({
-      _id: new req.db.Types.ObjectId(),
+      _id: new mongoose.Types.ObjectId(),
       user: req.body.user,
       password: req.body.password,
       rol: rol,
@@ -44,7 +40,9 @@ router.post('/add', function(req, res) {
 router.delete('/delete/:id', function(req, res) {
   var userToDelete = req.params.id;
   User.remove({ '_id' : userToDelete }, function (err) {
-    if (err) return next(err);
+    res.send(
+        (err === null) ? { msg: '' } : { msg: err }
+    );
   });
 });
 

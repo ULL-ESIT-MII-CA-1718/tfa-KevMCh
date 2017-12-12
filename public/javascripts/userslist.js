@@ -13,7 +13,7 @@ function fillTable() {
   var tableContent = '';
 
   // jQuery AJAX call for JSON
-  $.getJSON( '/users/userslist', function(data) {
+  $.getJSON('/users/', function(data) {
     // Stick our user data array into a userlist variable in the global object
     userListData = data;
 
@@ -21,7 +21,7 @@ function fillTable() {
     $.each(data, function(){
       tableContent += '<tr>';
       tableContent += '<td><a href="#" class="showuser" rel="' + this._id + '">' + this.user + '</a></td>';
-      tableContent += '<td>' + this.rol + '</td>';
+      tableContent += '<td>' + this.rol.name + '</td>';
       tableContent += '<td><a class="deleteuser" rel="' + this._id + '">delete</a></td>';
       tableContent += '</tr>';
     });
@@ -50,7 +50,7 @@ function showUserInfo(event) {
   //Populate Info Box
   $('#user').text(thisUser.user);
   $('#password').text(thisUser.password);
-  $('#rol').text(thisUser.rol);
+  $('#rol').text(thisUser.rol.name);
 };
 
 // Username link click
@@ -73,9 +73,7 @@ function deleteUser(event) {
     }).done(function( response ) {
 
       // Check for a successful (blank) response
-      if (response.msg === '') {
-
-      } else {
+      if (response.msg !== '') {
         alert('Error: ' + response.msg);
       }
 

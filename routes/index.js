@@ -10,14 +10,14 @@ router.get('/', function(req, res, next) {
 
 /* GET users list page. */
 router.get('/userslist', function(req, res, next) {
-  res.render('userslist');
+  res.render('users/userslist');
 });
 
 /* GET add a user page. */
 router.get('/adduser', function(req, res, next) {
   Rol.find(function (err, roles) {
     if (err) return next(err);
-    res.render('adduser', { roles: roles });
+    res.render('users/adduser', { roles: roles });
   });
 });
 
