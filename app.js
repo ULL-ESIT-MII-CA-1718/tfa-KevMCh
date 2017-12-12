@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // Database
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/cmsa');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/cmsa', { useMongoClient: true });
+mongoose.Promise = global.Promise;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-    req.db = db;
+    req.db = mongoose;
     next();
 });
 

@@ -11,7 +11,7 @@ block content
     select#inputRol
       option(value="") Seleccione un valor
       each rol in roles
-        option(value=rol) #{rol}
+        option(value=rol._id) #{rol.name}
     br
     br
     button#btnAddUser Añadir usuario

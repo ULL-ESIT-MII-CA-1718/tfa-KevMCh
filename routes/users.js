@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var User = require('../models/User.js')
+var Rol = require('../models/Rol.js');
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -8,33 +11,40 @@ router.get('/', function(req, res, next) {
 
 /* GET users list page. */
 router.get('/userslist', function(req, res, next) {
-  var db = req.db;
-  var collection = db.get('users');
-  collection.find({},{},function(e,docs){
-      res.json(docs);
-  });
+  User.find().
+    populate('Rol').
+    exec(function (err, rol) {
+      if (err) return next(err);
+
+      res.json(rol);
+    });
 });
 
 /* POST to add a user. */
 router.post('/add', function(req, res) {
-    var db = req.db;
-    var collection = db.get('users');
+  Rol.findOne({ _id: req.body.rol }, function (err, rol) {
+    if (err) return next(err);
 
-    collection.insert(req.body, function(err, result){
-        res.send(
-            (err === null) ? { msg: '' } : { msg: err }
-        );
+    var newUser = new User ({
+      _id: new req.db.Types.ObjectId(),
+      user: req.body.user,
+      password: req.body.password,
+      rol: rol,
     });
+
+    newUser.save(function (err) {
+      res.send(
+          (err === null) ? { msg: '' } : { msg: err }
+      );
+    });
+  });
 });
 
 /* DELETE to remove a user */
 router.delete('/delete/:id', function(req, res) {
-  var db = req.db;
-  var collection = db.get('userlist');
-
   var userToDelete = req.params.id;
-  collection.remove({ '_id' : userToDelete }, function(err) {
-    res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
+  User.remove({ '_id' : userToDelete }, function (err) {
+    if (err) return next(err);
   });
 });
 

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var Rol = require('../models/Rol.js');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -8,12 +10,15 @@ router.get('/', function(req, res, next) {
 
 /* GET users list page. */
 router.get('/userslist', function(req, res, next) {
-  res.render('userslist', { title: 'Express' });
+  res.render('userslist');
 });
 
 /* GET add a user page. */
 router.get('/adduser', function(req, res, next) {
-  res.render('adduser', { roles: {adm: 'Administrador', col: 'Colegial'} });
+  Rol.find(function (err, roles) {
+    if (err) return next(err);
+    res.render('adduser', { roles: roles });
+  });
 });
 
 module.exports = router;
