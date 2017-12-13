@@ -58,4 +58,33 @@ router.delete('/delete/:id', function(req, res) {
   });
 });
 
+/* PUT to update a user */
+router.put('/update/:id', function(req, res) {
+  console.log("Cuerpo")
+  console.log(req.body)
+  console.log("ID")
+  console.log(req.params.id)
+
+  Rol.findOne({ _id: req.body.rol }, function (err, rol) {
+    if (err) return next(err);
+
+    var userToUpdate = req.params.id;
+    User.update(
+      { _id: userToUpdate },
+      { $set:
+        {
+          user: req.body.user,
+          password: req.body.password,
+          rol: rol
+        }
+      },
+      function (err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+      }
+    );
+  });
+});
+
 module.exports = router;

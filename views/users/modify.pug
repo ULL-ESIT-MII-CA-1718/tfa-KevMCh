@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h2 Mofidicar usuario
+
+  #updateUser
+    input#inputID(type='hidden', value=user._id)
+    input#inputUser(type='text', placeholder='Usuario', value=user.user)
+    br
+    input#inputPassword(type='text', placeholder='Contraseña' value=user.password)
+    br
+    select#inputRol
+      option(value="") Seleccione un valor
+      each rol in roles
+        if user.rol._id = rol._id
+          option(value=rol._id selected='selected') #{rol.name}
+        else
+          option(value=rol._id) #{rol.name}
+    br
+    br
+    button#btnUpdateUser Modificar usuario
