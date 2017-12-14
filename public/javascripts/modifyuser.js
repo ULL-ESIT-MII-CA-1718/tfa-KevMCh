@@ -43,7 +43,6 @@ function updateUser(event) {
     return false;
   }
 };
-// end::functionAddUser[]
 
-// Add User button click
+// Update User button click
 $('#btnUpdateUser').on('click', updateUser);

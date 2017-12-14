@@ -44,7 +44,6 @@ function addUser(event) {
     return false;
   }
 };
-// end::functionAddUser[]
 
 // Add User button click
 $('#btnAddUser').on('click', addUser);
