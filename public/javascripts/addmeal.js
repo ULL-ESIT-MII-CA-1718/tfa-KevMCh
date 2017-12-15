@@ -1,37 +1,37 @@
 $(document).ready(function() {
-  // Modify User
-  function updateUser(event) {
+  // Add Meal
+  function addMeal(event) {
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
-    $('#updateUser input').each(function(index, val) {
+    $('#addMeal input').each(function(index, val) {
       if($(this).val() === '') { errorCount++; }
     });
 
-    $('#updateUser select').each(function(index, val) {
+    $('#addMeal select').each(function(index, val) {
       if($(this).val() === '') { errorCount++; }
     });
 
     // Check and make sure errorCount's still at zero
     if(errorCount === 0) {
       // If it is, compile all user info into one object
-      var updateUser = {
-        'user': $('#updateUser input#inputUser').val(),
-        'password': $('#updateUser input#inputPassword').val(),
-        'rol': $('#updateUser select#inputRol').val()
+      var newMeal = {
+        'name': $('#addMeal input#inputName').val(),
+        'typeMeal': $('#addMeal select#inputType').val()
       }
 
-      // Use AJAX to post the object to our modifyuser service
+      // Use AJAX to post the object to our adduser service
       $.ajax({
-        type: 'PUT',
-        data: updateUser,
-        url: '/users/update/' + $('#updateUser input#inputID').val(),
+        type: 'POST',
+        data: newMeal,
+        url: '/meals/add',
         dataType: 'JSON'
       }).done(function( response ) {
         // Check for successful (blank) response
         if (response.msg === '') {
-          alert('Usuario actualizado.');
+          alert("Comida añadida");
+          // window.location.replace("");
 
         } else {
           // If something goes wrong, alert the error message that our service returned
@@ -45,6 +45,6 @@ $(document).ready(function() {
     }
   };
 
-  // Update User button click
-  $('#btnUpdateUser').on('click', updateUser);
+  // Add Meal button click
+  $('#btnAddMeal').on('click', addMeal);
 });

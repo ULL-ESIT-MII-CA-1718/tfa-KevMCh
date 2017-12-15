@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  script(src='/javascripts/addmeal.js')
+  h2 Nueva Comida
+
+  #addMeal
+    input#inputName(type='text', placeholder='Nombre plato')
+    br
+    select#inputType
+      option(value="") Seleccione un valor
+      if typemeals
+        each type in typemeals
+          option(value=type._id) #{type.name}
+    br
+    br
+    button#btnAddMeal Añadir Plato

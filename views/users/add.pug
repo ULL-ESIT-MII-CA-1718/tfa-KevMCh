@@ -1,6 +1,7 @@
 extends ../layout
 
 block content
+  script(src='/javascripts/adduser.js')
   h2 Nuevo usuario
 
   #addUser
@@ -10,8 +11,9 @@ block content
     br
     select#inputRol
       option(value="") Seleccione un valor
-      each rol in roles
-        option(value=rol._id) #{rol.name}
+      if roles
+        each rol in roles
+          option(value=rol._id) #{rol.name}
     br
     br
-    button#btnAddUser Añadir usuario
+    button#btnAddMeal Añadir comida

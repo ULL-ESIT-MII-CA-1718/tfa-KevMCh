@@ -2,17 +2,17 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/User.js')
-var Rol = require('../models/Rol.js');
+var User = require('../models/User')
+var Rol = require('../models/Rol');
 
 /* GET users list. */
 router.get('/', function(req, res) {
   User.find().
     populate('rol').
-    exec(function (err, rol) {
+    exec(function (err, users) {
       if (err) return next(err);
 
-      res.json(rol);
+      res.json(users);
     });
 });
 
@@ -36,11 +36,11 @@ router.post('/add', function(req, res) {
 
   req.checkBody('user', 'El campo de nombre es obligatorio.').notEmpty();
   req.checkBody('password', 'El campo de contraseña es obligatorio.').notEmpty();
-  req.checkBody('rol', 'El campo de nombre es obligatorio.').notEmpty();
+  req.checkBody('rol', 'El campo del rol es obligatorio.').notEmpty();
 
   var errors = req.validationErrors();
   if(errors) {
-    res.send({ msg: err });
+    res.send({ msg: errors });
 
   } else {
     Rol.findOne({ _id: req.body.rol }, function (err, rol) {

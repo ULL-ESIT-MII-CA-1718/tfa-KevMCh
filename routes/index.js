@@ -3,8 +3,9 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/User.js');
-var Rol = require('../models/Rol.js');
+var User = require('../models/User');
+var Rol = require('../models/Rol');
+var TypeMeal = require('../models/TypeMeal')
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -101,6 +102,14 @@ router.get('/logout', function(req, res){
 	req.logout();
 	req.flash('success_msg', 'Sesión cerrada.');
 	res.redirect('/');
+});
+
+/* GET page to add a meal. */
+router.get('/addmeal', function(req, res, next) {
+  TypeMeal.find(function (err, typemeals) {
+    if (err) return next(err);
+    res.render('meals/add', { typemeals: typemeals });
+  });
 });
 
 module.exports = router;
