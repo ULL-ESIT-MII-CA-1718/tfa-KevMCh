@@ -18,7 +18,7 @@ $(document).ready(function() {
       // If it is, compile all user info into one object
       var newMeal = {
         'name': $('#addMeal input#inputName').val(),
-        'typeMeal': $('#addMeal select#inputType').val()
+        'typesMeal': $('#addMeal select#inputTypes').val()
       }
 
       // Use AJAX to post the object to our adduser service

@@ -7,8 +7,7 @@ block content
   #addMeal
     input#inputName(type='text', placeholder='Nombre plato')
     br
-    select#inputType
-      option(value="") Seleccione un valor
+    select(multiple)#inputTypes
       if typemeals
         each type in typemeals
           option(value=type._id) #{type.name}

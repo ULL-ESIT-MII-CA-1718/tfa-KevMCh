@@ -12,7 +12,7 @@ $(document).ready(function() {
       // For each item in our JSON, add a table row and cells to the content string
       $.each(data, function(){
         tableContent += '<tr>';
-        tableContent += '<td><a href="#" class="showuser" rel="' + this._id + '">' + this.user + '</a></td>';
+        tableContent += '<td><a class="showuser" rel="' + this._id + '">' + this.user + '</a></td>';
         tableContent += '<td>' + this.rol.name + '</td>';
         tableContent += '<td><a href="modifyuser/' + this._id + '">modify</a></td>';
         tableContent += '<td><a class="deleteuser" rel="' + this._id + '">delete</a></td>';
