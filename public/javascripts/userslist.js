@@ -9,9 +9,6 @@ $(document).ready(function() {
 
     // jQuery AJAX call for JSON
     $.getJSON('/users/', function(data) {
-      // Stick our user data array into a userlist variable in the global object
-      userListData = data;
-
       // For each item in our JSON, add a table row and cells to the content string
       $.each(data, function(){
         tableContent += '<tr>';

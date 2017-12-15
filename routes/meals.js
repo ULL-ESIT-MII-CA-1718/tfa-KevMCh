@@ -5,6 +5,17 @@ var router = express.Router();
 var TypeMeal = require('../models/TypeMeal');
 var Meal = require('../models/meal.js');
 
+/* GET meals list. */
+router.get('/', function(req, res) {
+  Meal.find().
+    populate('type').
+    exec(function (err, meal) {
+      if (err) return next(err);
+
+      res.json(meal);
+    });
+});
+
 /* POST to add a meal. */
 router.post('/add', function(req, res) {
   var name = req.body.name;

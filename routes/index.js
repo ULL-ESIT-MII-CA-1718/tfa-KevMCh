@@ -112,4 +112,9 @@ router.get('/addmeal', function(req, res, next) {
   });
 });
 
+/* GET meals list page. */
+router.get('/mealslist', function(req, res, next) {
+  res.render('meals/list');
+});
+
 module.exports = router;
