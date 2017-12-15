@@ -79,4 +79,14 @@ router.post('/add', function(req, res) {
   }
 });
 
+/* DELETE to remove a meal */
+router.delete('/delete/:id', function(req, res) {
+  var mealToDelete = req.params.id;
+  Meal.remove({ '_id' : mealToDelete }, function (err) {
+    res.send(
+        (err === null) ? { msg: '' } : { msg: err }
+    );
+  });
+});
+
 module.exports = router;
