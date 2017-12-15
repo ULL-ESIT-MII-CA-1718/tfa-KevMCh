@@ -5,7 +5,8 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../models/User');
 var Rol = require('../models/Rol');
-var TypeMeal = require('../models/TypeMeal')
+var TypeMeal = require('../models/TypeMeal');
+var Meal = require('../models/Meal');
 
 function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
@@ -115,6 +116,21 @@ router.get('/addmeal', function(req, res, next) {
 /* GET meals list page. */
 router.get('/mealslist', function(req, res, next) {
   res.render('meals/list');
+});
+
+/* GET page to modify a meal. */
+router.get('/modifymeal/:id', function(req, res, next) {
+  var mealToFind = req.params.id;
+  Meal.findOne({ '_id' : mealToFind }).
+    populate('types').
+    exec(function (err, meal) {
+      if (err) return next(err);
+
+      TypeMeal.find(function (err, typesmeals) {
+        if (err) return next(err);
+        res.render('meals/modify', { meal: meal, typesmeals: typesmeals });
+      });
+    });
 });
 
 module.exports = router;

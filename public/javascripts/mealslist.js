@@ -13,6 +13,7 @@ $(document).ready(function() {
       $.each(data, function(){
         tableContent += '<tr>';
         tableContent += '<td><a class="showmeal" rel="' + this._id + '">' + this.name + '</a></td>';
+        tableContent += '<td><a href="modifymeal/' + this._id + '">modify</a></td>';
         tableContent += '<td><a class="deletemeal" rel="' + this._id + '">delete</a></td>';
         tableContent += '</tr>';
       });

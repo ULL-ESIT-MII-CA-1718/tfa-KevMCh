@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var TypeMeal = require('../models/TypeMeal');
-var Meal = require('../models/meal.js');
+var Meal = require('../models/Meal');
 
 /* GET meals list. */
 router.get('/', function(req, res) {
@@ -41,20 +41,6 @@ router.post('/add', function(req, res) {
     res.send({ msg: errors });
 
   } else {
-    var typesList = [];
-
-    /* var p1 = Promise.resolve(3);
-    var p2 = 1337;
-    var p3 = new Promise((resolve, reject) => {
-      setTimeout(resolve, 100, "foo");
-    });
-
-    var prmis = [p1, p2, p3];
-
-    Promise.all(prmis).then(types => {
-      console.log(types);
-    }); */
-
     Promise.all(typesMeal.map((id) =>
       new Promise((resolve, reject) => {
         TypeMeal.findOne({ _id: id }, function (err, type) {
@@ -73,7 +59,7 @@ router.post('/add', function(req, res) {
       newMeal.save(function (err) {
         if (err) return handleError(err);
 
-        req.flash('success_msg', 'Plato creado.');
+        req.flash('success_msg', 'Comida creado.');
       });
     });
   }
@@ -87,6 +73,50 @@ router.delete('/delete/:id', function(req, res) {
         (err === null) ? { msg: '' } : { msg: err }
     );
   });
+});
+
+/* PUT to update a user */
+router.put('/update/:id', function(req, res) {
+  var name = req.body.name;
+  var typesMeal = req.body['typesMeal[]'];
+
+  req.checkBody('name', 'El campo de nombre es obligatorio.').notEmpty();
+  // req.checkBody('typesMeal', 'El campo del tipo es obligatorio.').notEmpty();
+
+  var errors = req.validationErrors();
+  if(errors) {
+    res.send({ msg: err });
+
+  } else {
+    Promise.all(typesMeal.map((id) =>
+      new Promise((resolve, reject) => {
+        TypeMeal.findOne({ _id: id }, function (err, type) {
+          if (err) reject(err);
+
+          resolve(type);
+        });
+      })
+    )).then(typesList => {
+      console.log("Promise all")
+      var mealToUpdate = req.params.id;
+      Meal.update(
+        { _id: mealToUpdate },
+        { $set:
+          {
+            name: name,
+            types: typesList
+          }
+        },
+        function (err) {
+          res.send(
+              (err === null) ? { msg: '' } : { msg: err }
+          );
+        }
+      );
+
+      req.flash('success_msg', 'Comida modificada.');
+    });
+  }
 });
 
 module.exports = router;

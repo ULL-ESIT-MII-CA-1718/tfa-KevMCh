@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  script(src='/javascripts/modifymeal.js')
+  h2 Mofidicar comida
+
+  #updateMeal
+    input#inputID(type='hidden', value=meal._id)
+    input#inputName(type='text', placeholder='Nombre plato' value=meal.name)
+    br
+    select(multiple)#inputTypes
+      if typesmeals
+        each type in typesmeals
+          option(value=type._id) #{type.name}
+    br
+    br
+    button#btnUpdateMeal Modificar comida
