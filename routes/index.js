@@ -149,4 +149,9 @@ router.get('/addmenu', function(req, res, next) {
     });
 });
 
+/* GET dailymeals list page. */
+router.get('/dailymealslist', function(req, res, next) {
+  res.render('menus/list');
+});
+
 module.exports = router;
