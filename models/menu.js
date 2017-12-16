@@ -3,10 +3,10 @@ var Schema = mongoose.Schema;
 
 var menuSchema = Schema({
   _id: Schema.Types.ObjectId,
-  starter: [{ type: Schema.Types.ObjectId, ref: 'Meal' }],
-  mainCourse: [{ type: Schema.Types.ObjectId, ref: 'Meal' }],
-  garnish: [{ type: Schema.Types.ObjectId, ref: 'Meal' }],
-  dessert: [{ type: Schema.Types.ObjectId, ref: 'Meal' }]
+  starters: [{ type: Schema.Types.ObjectId, ref: 'Meal' }],
+  mainCourses: [{ type: Schema.Types.ObjectId, ref: 'Meal' }],
+  garnishs: [{ type: Schema.Types.ObjectId, ref: 'Meal' }],
+  desserts: [{ type: Schema.Types.ObjectId, ref: 'Meal' }]
 });
 
 var Menu = mongoose.model('Menu', menuSchema);

@@ -133,4 +133,20 @@ router.get('/modifymeal/:id', function(req, res, next) {
     });
 });
 
+/* GET page to add a menu. */
+router.get('/addmenu', function(req, res, next) {
+	Meal.find().
+    populate('type').
+    exec(function (err, meals) {
+      if (err) return next(err);
+
+			res.render('menus/add', {
+				starters: meals,
+				mainCourses: meals,
+				garnishs: meals,
+				desserts: meals,
+			});
+    });
+});
+
 module.exports = router;

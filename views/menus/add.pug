@@ -1,0 +1,47 @@
+extends ../layout
+
+block content
+  script(src='/javascripts/addmenu.js')
+  h2 Nuevo Menú
+
+  #addMenu
+    div
+      p Fecha
+      input#inputDate(type='text', placeholder='Fecha')
+    div
+      p Tipo
+      select#inputType
+        option(value=almuerzo) Selecciona la comida
+        option(value=almuerzo) Almuerzo
+        option(value=cena) Cena
+    br
+    div
+      p Primer plato
+    select(multiple)#inputStarters
+      if starters
+        each starter in starters
+          option(value=starter._id) #{starter.name}
+    br
+    div
+      p Segundo plato
+    select(multiple)#inputMainCourses
+      if mainCourses
+        each mainCourse in mainCourses
+          option(value=mainCourse._id) #{mainCourse.name}
+    br
+    div
+      p Guarnicion
+    select(multiple)#inputGarnishs
+      if garnishs
+        each garnish in garnishs
+          option(value=garnish._id) #{garnish.name}
+    br
+    div
+      p Postre
+    select(multiple)#inputDesserts
+            if desserts
+              each dessert in desserts
+                option(value=dessert._id) #{dessert.name}
+    br
+    br
+    button#btnAddMenu Añadir Menu

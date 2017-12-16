@@ -38,6 +38,7 @@ $(document).ready(function() {
       });
       typesList += "</ul>";
 
+      $('#type').empty();
       $('#type').append(typesList);
     });
   };
