@@ -92,7 +92,7 @@ router.post('/add', function(req, res) {
 
             DailyMeals.findOne({ 'date' : date }).
               exec(function (err, dailyMeals) {
-                if (err) return next(err);
+                if (err) return err;
 
                 if (!dailyMeals) {
                   if(type === 'Almuerzo') {
@@ -112,7 +112,7 @@ router.post('/add', function(req, res) {
                   }
 
                   newDailyMeals.save(function (err) {
-                    if (err) return handleError(err);
+                    if (err) return err;
 
                     req.flash('success_msg', 'Comida del día creada.');
                   });
