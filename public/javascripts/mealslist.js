@@ -13,7 +13,7 @@ $(document).ready(function() {
       $.each(data, function(){
         tableContent += '<tr>';
         tableContent += '<td><a class="showmeal" rel="' + this._id + '">' + this.name + '</a></td>';
-        tableContent += '<td><a href="modifymeal/' + this._id + '">modify</a></td>';
+        tableContent += '<td><a href="/modifymeal/' + this._id + '">modify</a></td>';
         tableContent += '<td><a class="deletemeal" rel="' + this._id + '">delete</a></td>';
         tableContent += '</tr>';
       });
@@ -28,7 +28,7 @@ $(document).ready(function() {
     // jQuery AJAX call for get the user
     $.ajax({
       type: 'GET',
-      url: 'meals/' + $(this).attr('rel')
+      url: '/meals/' + $(this).attr('rel')
     }).done(function(response) {
       $('#name').text(response.name);
 
