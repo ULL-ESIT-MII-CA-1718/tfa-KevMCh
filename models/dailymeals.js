@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Menu = require('../models/Menu');
+
 var dailymealsSchema = Schema({
   _id: Schema.Types.ObjectId,
   lunch: { type: Schema.Types.ObjectId, ref: 'Menu' },
@@ -16,14 +18,20 @@ module.exports.getDailyMealsById = function(dailymealsToFind, callback) {
 
   var lunch = DailyMeals.findOne({ '_id' : dailymealsToFind }).
     populate('lunch').
-    exec(function (err, dailymeal) {
-      if (err) return next(err);
+    exec().
+    then(dailyMeals => {
+      if (dailyMeals.lunch !== undefined) {
+        return Menu.getPromiseMenuById(dailyMeals.lunch._id);
+      }
   });
 
   var dinner = DailyMeals.findOne({ '_id' : dailymealsToFind }).
     populate('dinner').
-    exec(function (err, dailymeal) {
-      if (err) return next(err);
+    exec().
+    then(dailyMeals => {
+      if (dailyMeals.dinner !== undefined) {
+        return Menu.getPromiseMenuById(dailyMeals.dinner._id);
+      }
   });
 
   Promise.all([specificDailyMeal, lunch, dinner]).then(callback);

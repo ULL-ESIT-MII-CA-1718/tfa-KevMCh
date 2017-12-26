@@ -11,3 +11,7 @@ var menuSchema = Schema({
 
 var Menu = mongoose.model('Menu', menuSchema);
 module.exports = Menu;
+
+module.exports.getPromiseMenuById = function(id) {
+  return Menu.findById(id).exec();
+}
