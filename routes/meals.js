@@ -18,14 +18,9 @@ router.get('/', function(req, res) {
 
 /* GET a specific meal */
 router.get('/:id', function(req, res) {
-  var mealToFind = req.params.id;
-  Meal.findOne({ '_id' : mealToFind }).
-    populate('types').
-    exec(function (err, meal) {
-      if (err) return next(err);
-
-      res.json(meal);
-    });
+  Meal.getMealById(req.params.id, function(err, meal) {
+    res.json(meal);
+  });
 });
 
 /* POST to add a meal. */

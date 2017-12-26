@@ -9,3 +9,11 @@ var mealSchema = Schema({
 
 var Meal = mongoose.model('Meal', mealSchema);
 module.exports = Meal;
+
+module.exports.getMealById = function(id, callback) {
+	Meal.findById(id, callback).
+    populate('types').
+    exec(function (err, meal) {
+      if (err) return next(err);
+    });
+}
