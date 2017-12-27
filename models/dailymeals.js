@@ -21,7 +21,7 @@ module.exports.getDailyMealsById = function(dailymealsToFind, callback) {
     exec().
     then(dailyMeals => {
       if (dailyMeals.lunch !== undefined) {
-        return Menu.getPromiseMenuById(dailyMeals.lunch._id);
+        return Menu.getPromiseMealsMenuById(dailyMeals.lunch);
       }
   });
 
@@ -30,7 +30,7 @@ module.exports.getDailyMealsById = function(dailymealsToFind, callback) {
     exec().
     then(dailyMeals => {
       if (dailyMeals.dinner !== undefined) {
-        return Menu.getPromiseMenuById(dailyMeals.dinner._id);
+        return Menu.getPromiseMealsMenuById(dailyMeals.dinner);
       }
   });
 

@@ -16,10 +16,7 @@ router.get('/', function(req, res) {
 /* GET a specific daily meals */
 router.get('/:id', function(req, res) {
   DailyMeals.getDailyMealsById(req.params.id, function(dailymeals) {
-    dailymeals[0].lunch = dailymeals[1];
-    dailymeals[0].dinner = dailymeals[2];
-
-    res.json(dailymeals[0]);
+    res.json(dailymeals);
   });
 });
 

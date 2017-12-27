@@ -17,3 +17,11 @@ module.exports.getMealById = function(id, callback) {
       if (err) return next(err);
     });
 }
+
+module.exports.getPromiseMealById = function(id) {
+  return Meal.findById(id).
+    populate('types').
+    exec().then(function(solve){
+      return solve;
+    });
+}

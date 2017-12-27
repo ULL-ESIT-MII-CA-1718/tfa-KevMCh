@@ -28,21 +28,21 @@ $(document).ready(function() {
       type: 'GET',
       url: '/dailymeals/' + $(this).attr('rel')
     }).done(function(response) {
-      $('#date').text(response.date);
+      $('#date').text(response[0].date);
       $('#lunch').empty();
-      $('#lunch').append(getMenu(response.lunch));
+      $('#lunch').append(getMenu(response[1]));
       $('#dinner').empty();
-      $('#dinner').append(getMenu(response.dinner));
+      $('#dinner').append(getMenu(response[2]));
     });
   };
 
   function getMenu(menu) {
     var content = "";
-    if (menu !== undefined) {
-      content += getMeals("Primer plato", menu.starters);
-      content += getMeals("Segundo plato:", menu.mainCourses);
-      content += getMeals("Guarnición:", menu.garnishs);
-      content += getMeals("Postre:", menu.desserts);
+    if (menu !== undefined && menu !== null) {
+      content += getMeals("Primer plato", menu[0]);
+      content += getMeals("Segundo plato:", menu[1]);
+      content += getMeals("Guarnición:", menu[2]);
+      content += getMeals("Postre:", menu[3]);
     }
     return content;
   }
@@ -51,8 +51,14 @@ $(document).ready(function() {
     var content = "<h6>" + title + "</h6>";
     content += "<ul>";
     if (listMeals !== undefined) {
-      listMeals.forEach(function(element) {
-        content += "<li>" + element + "</li>";
+      listMeals.forEach(function(meal) {
+        content += "<li>" + meal.name + "( ";
+
+        meal.types.forEach(function(type) {
+          content += type.name + " "
+        });
+
+        content += ")</li>";
       });
     }
     content += "</ul>";
@@ -62,5 +68,4 @@ $(document).ready(function() {
 
   // Username link click
   $('#dailyMeals table tbody').on('click', 'td a.showdailymeals', showDailyMealsInfo);
-
 });
