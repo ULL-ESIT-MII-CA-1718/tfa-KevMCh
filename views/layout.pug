@@ -17,29 +17,26 @@ html
             span(class="icon-bar")
             span(class="icon-bar")
             span(class="icon-bar")
-          a(class="navbar-brand", href="#") Logo
+          a(class="navbar-brand", href="/") Logo
 
         div(class="collapse navbar-collapse", id="myNavbar")
           ul(class="nav navbar-nav")
             if user
-              li(class="active")
-                a(href="#") Home
               li
-                a(href="#") Usuarios
+                a(href="/userslist/") Usuarios
               li
-                a(href="#") Menú
+                a(href="/mealslist/") Comidas
+              li
+                a(href="/dailymealslist/") Menús
           ul(class="nav navbar-nav navbar-right")
             li
               if user
                 a(href='/logout')
-                  span(class="glyphicon glyphicon-log-in") Logout
-
-
+                  span(class="glyphicon glyphicon-log-in")
 
     div(class="container-fluid")
       div(class="row content")
-        div(class="col-sm-3 sidenav hidden-xs")
-          block content
+        block content
 
     footer(class="container-fluid text-center")
       p Footer

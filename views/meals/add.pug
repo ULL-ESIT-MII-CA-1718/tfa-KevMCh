@@ -1,16 +1,24 @@
 extends ../layout
 
 block content
-  script(src='/javascripts/addmeal.js')
-  h2 Nueva Comida
+  script(src='/javascripts/meals/add.js')
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Nueva Comida
 
-  #addMeal
-    input#inputName(type='text', placeholder='Nombre plato')
-    br
-    select(multiple)#inputTypes
-      if typemeals
-        each type in typemeals
-          option(value=type._id) #{type.name}
-    br
-    br
-    button#btnAddMeal Añadir Plato
+  div#addMeal(class='row')
+    div(class='col-lg-2 offset-lg-2')
+    div(class='col-lg-4')
+      label Nombre de la comida:
+      br
+      input#inputName(type='text', placeholder='Nombre de la comida')
+      br
+      label Tipo:
+      br
+      select(multiple)#inputTypes
+        if typemeals
+          each type in typemeals
+            option(value=type._id) #{type.name}
+
+    div(class='col-lg-4')
+      button#btnAddMeal Añadir Plato

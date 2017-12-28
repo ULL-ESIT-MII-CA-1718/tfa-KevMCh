@@ -1,20 +1,33 @@
 extends ../layout
 
 block content
-  script(src='/javascripts/dailymeals.js')
-  h2 Comidas diarias
+  script(src='/javascripts/dailymeals/list.js')
 
-  h2 Información del menú del <span id='date'></span>
-  p
-    strong Almuerzo: 
-    |  <span id='lunch'></span>
-    br
-    strong Cena:
-    |  <span id='dinner'></span>
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Menús diarios
 
-  #dailyMeals
-    h2 Listado diario
-    table
-      thead
-        th Fecha
-      tbody
+  div(class='row')
+    div(class='col-lg-11 offset-lg-11')
+    div(class='col-lg-1')
+      a(href='/addmenu', class='add')
+        span(class='glyphicon glyphicon-plus')
+
+  div(class='row')
+    div(class='col-lg-1 offset-lg-1')
+    div(class='col-lg-3')
+      h2 Información del menú del <span id='date'></span>
+      p
+      strong Almuerzo:
+      |  <span id='lunch'></span>
+      br
+      strong Cena:
+      |  <span id='dinner'></span>
+
+    div(class='col-lg-1 offset-lg-1')
+    div#dailyMeals(class='col-lg-5')
+      h2 Listado diario
+      table
+        thead
+          th Fecha
+        tbody

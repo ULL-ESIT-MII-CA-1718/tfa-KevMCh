@@ -1,47 +1,53 @@
 extends ../layout
 
 block content
-  script(src='/javascripts/addmenu.js')
-  h2 Nuevo Menú
+  script(src='/javascripts/menus/add.js')
 
-  #addMenu
-    div
-      p Fecha
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Nuevo Menú
+
+  div#addMenu(class='row')
+    div(class='col-lg-3 offset-lg-3')
+    div(class='col-lg-2')
+      label Fecha:
+      br
       input#inputDate(type='text', placeholder='Fecha')
-    div
-      p Tipo
+      br
+      label Tipo:
+      br
       select#inputType
         option(value=almuerzo) Selecciona la comida
         option(value=almuerzo) Almuerzo
         option(value=cena) Cena
-    br
-    div
-      p Primer plato
-    select(multiple)#inputStarters
-      if starters
-        each starter in starters
-          option(value=starter._id) #{starter.name}
-    br
-    div
-      p Segundo plato
-    select(multiple)#inputMainCourses
-      if mainCourses
-        each mainCourse in mainCourses
-          option(value=mainCourse._id) #{mainCourse.name}
-    br
-    div
-      p Guarnicion
-    select(multiple)#inputGarnishs
-      if garnishs
-        each garnish in garnishs
-          option(value=garnish._id) #{garnish.name}
-    br
-    div
-      p Postre
-    select(multiple)#inputDesserts
-            if desserts
-              each dessert in desserts
-                option(value=dessert._id) #{dessert.name}
-    br
-    br
-    button#btnAddMenu Añadir Menu
+    div(class='col-lg-2')
+      label Primer plato:
+      br
+      select(multiple)#inputStarters
+        if starters
+          each starter in starters
+            option(value=starter._id) #{starter.name}
+      br
+      label Segundo plato
+      br
+      select(multiple)#inputMainCourses
+        if mainCourses
+          each mainCourse in mainCourses
+            option(value=mainCourse._id) #{mainCourse.name}
+      br
+      label Guarnición:
+      br
+      select(multiple)#inputGarnishs
+        if garnishs
+          each garnish in garnishs
+            option(value=garnish._id) #{garnish.name}
+      br
+      label Postre
+      br
+      select(multiple)#inputDesserts
+        if desserts
+          each dessert in desserts
+            option(value=dessert._id) #{dessert.name}
+
+    div(class='col-lg-3')
+      button#btnAddMenu Añadir Menu

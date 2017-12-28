@@ -8,57 +8,52 @@ $(document).ready(function() {
     var tableContent = '';
 
     // jQuery AJAX call for JSON
-    $.getJSON('/meals/', function(data) {
+    $.getJSON('/users/', function(data) {
       // For each item in our JSON, add a table row and cells to the content string
       $.each(data, function(){
         tableContent += '<tr>';
-        tableContent += '<td><a class="showmeal" rel="' + this._id + '">' + this.name + '</a></td>';
-        tableContent += '<td><a href="/modifymeal/' + this._id + '">modify</a></td>';
-        tableContent += '<td><a class="deletemeal" rel="' + this._id + '">delete</a></td>';
+        tableContent += '<td><a class="showuser" rel="' + this._id + '">' + this.user + '</a></td>';
+        tableContent += '<td>' + this.rol.name + '</td>';
+        tableContent += '<td><a href="/modifyuser/' + this._id + '"><span class="glyphicon glyphicon-pencil modify"></span></a></td>'
+        tableContent += '<td><a class="deleteuser" rel="' + this._id + '"><span class="glyphicon glyphicon-remove remove"></span></a></td>';
         tableContent += '</tr>';
       });
 
       // Inject the whole content string into our existing HTML table
-      $('#mealList table tbody').html(tableContent);
+      $('#userList table tbody').html(tableContent);
     });
   };
 
   // Show User Info
-  function showMealInfo(event) {
+  function showUserInfo(event) {
     // jQuery AJAX call for get the user
     $.ajax({
       type: 'GET',
-      url: '/meals/' + $(this).attr('rel')
+      url: '/users/' + $(this).attr('rel')
     }).done(function(response) {
-      $('#name').text(response.name);
-
-      var typesList = "<ul>";
-      $.each(response.types, function(key, type) {
-        typesList += "<li>" + type.name + "</li>";
-      });
-      typesList += "</ul>";
-
-      $('#type').empty();
-      $('#type').append(typesList);
+      $('#user').text(response.user);
+      $('#password').text(response.password);
+      $('#rol').text(response.rol.name);
     });
   };
 
   // Username link click
-  $('#mealList table tbody').on('click', 'td a.showmeal', showMealInfo);
+  $('#userList table tbody').on('click', 'td a.showuser', showUserInfo);
 
-  // Delete Meal
-  function deleteMeal(event) {
+  // Delete User
+  function deleteUser(event) {
     event.preventDefault();
 
     // Pop up a confirmation dialog
-    var confirmation = confirm('¿Seguro qué quieres eliminar la comida?');
+    var confirmation = confirm('¿Seguro qué quieres eliminar este usuario?');
 
     // Check and make sure the user confirmed
     if (confirmation === true) {
+
       // If they did, do our delete
       $.ajax({
         type: 'DELETE',
-        url: '/meals/delete/' + $(this).attr('rel')
+        url: '/users/delete/' + $(this).attr('rel')
       }).done(function( response ) {
 
         // Check for a successful (blank) response
@@ -76,5 +71,5 @@ $(document).ready(function() {
   };
 
   // Delete User link click
-  $('#mealList table tbody').on('click', 'td a.deletemeal', deleteMeal);
+  $('#userList table tbody').on('click', 'td a.deleteuser', deleteUser);
 });

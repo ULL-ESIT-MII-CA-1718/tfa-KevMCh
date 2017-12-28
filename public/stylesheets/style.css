@@ -6,6 +6,11 @@ a {
   color: #00B7FF;
 }
 
+.title {
+  text-align: center;
+  margin: 50px;
+}
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
   margin-bottom: 0;
@@ -21,4 +26,24 @@ footer {
   background-color: #f2f2f2;
   padding: 25px;
   text-align: center;
+}
+
+.add {
+  color: GREEN;
+}
+
+.modify {
+  color: BLUE;
+}
+
+.remove {
+  color: RED;
+}
+
+th, td {
+  padding: 10px;
+}
+
+label {
+  margin-top: 20px;
 }

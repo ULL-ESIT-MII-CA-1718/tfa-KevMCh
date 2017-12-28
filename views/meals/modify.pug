@@ -1,17 +1,25 @@
 extends ../layout
 
 block content
-  script(src='/javascripts/modifymeal.js')
-  h2 Mofidicar comida
+  script(src='/javascripts/meals/modify.js')
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Mofidicar comida
 
-  #updateMeal
-    input#inputID(type='hidden', value=meal._id)
-    input#inputName(type='text', placeholder='Nombre plato' value=meal.name)
-    br
-    select(multiple)#inputTypes
-      if typesmeals
-        each type in typesmeals
-          option(value=type._id) #{type.name}
-    br
-    br
-    button#btnUpdateMeal Modificar comida
+  div#updateMeal(class='row')
+    div(class='col-lg-2 offset-lg-2')
+    div(class='col-lg-4')
+      input#inputID(type='hidden', value=meal._id)
+      label Nombre de la comida:
+      br
+      input#inputName(type='text', placeholder='Nombre plato' value=meal.name)
+      br
+      label Tipo:
+      br
+      select(multiple)#inputTypes
+        if typesmeals
+          each type in typesmeals
+            option(value=type._id) #{type.name}
+
+    div(class='col-lg-4')
+      button#btnUpdateMeal Modificar comida

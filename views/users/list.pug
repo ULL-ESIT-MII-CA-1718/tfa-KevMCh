@@ -1,27 +1,37 @@
 extends ../layout
 
 block content
-  script(src='/javascripts/userslist.js')
-  h2 Usuarios
+  script(src='/javascripts/users/list.js')
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Usuarios
 
-  #userInfo
-    h2 User Info
-    p
-      strong Nombre:
-      |  <span id='user'></span>
-      br
-      strong Contraseña:
-      |  <span id='password'></span>
-      br
-      strong Rol:
-      |  <span id='rol'></span>
+  div(class='row')
+    div(class='col-lg-11 offset-lg-11')
+    div(class='col-lg-1')
+      a(href='/adduser', class='add')
+        span(class='glyphicon glyphicon-plus')
 
-  #userList
-    h2 Lista de usuarios
-    table
-      thead
-        th User
-        th Rol
-        th Modify
-        th Delete
-      tbody
+  div#userInfo(class='row')
+    div(class='col-lg-1 offset-md-1')
+    div(class='col-lg-3')
+      h2 User Info
+      p
+        strong Nombre:
+        |  <span id='user'></span>
+        br
+        strong Contraseña:
+        |  <span id='password'></span>
+        br
+        strong Rol:
+        |  <span id='rol'></span>
+    div(class='col-lg-1 offset-md-1')
+    div#userList(class='col-lg-5')
+      h2 Lista de usuarios
+      table
+        thead
+          th User
+          th Rol
+          th
+          th
+        tbody

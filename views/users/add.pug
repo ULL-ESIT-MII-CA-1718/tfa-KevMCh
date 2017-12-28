@@ -1,19 +1,29 @@
 extends ../layout
 
 block content
-  script(src='/javascripts/adduser.js')
-  h2 Nuevo usuario
+  script(src='/javascripts/users/add.js')
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Nuevo usuario
 
-  #addUser
-    input#inputUser(type='text', placeholder='Usuario')
-    br
-    input#inputPassword(type='password', placeholder='Contraseña')
-    br
-    select#inputRol
-      option(value="") Seleccione un valor
-      if roles
-        each rol in roles
-          option(value=rol._id) #{rol.name}
-    br
-    br
-    button#btnAddUser Añadir Usuario
+  div#addUser(class='row')
+    div(class='col-lg-2 offset-lg-2')
+    div(class='col-lg-3')
+      label Nombre de usuario:
+      br
+      input#inputUser(type='text', placeholder='Usuario')
+      br
+      label Contraseña:
+      br
+      input#inputPassword(type='password', placeholder='Contraseña')
+    div(class='col-lg-3')
+      label Rol:
+      br
+      select#inputRol
+        option(value="") Seleccione un valor
+        if roles
+          each rol in roles
+            option(value=rol._id) #{rol.name}
+
+    div(class='col-lg-4')
+      button#btnAddUser Añadir Usuario
