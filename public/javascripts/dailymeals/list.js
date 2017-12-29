@@ -13,6 +13,7 @@ $(document).ready(function() {
       $.each(data, function(){
         tableContent += '<tr>';
         tableContent += '<td><a class="showdailymeals" rel="' + this._id + '">' + this.date + '</a></td>';
+        tableContent += '<td><a href="/modifydailymeals/' + this._id + '"><span class="glyphicon glyphicon-pencil modify"></span></a></td>';
         tableContent += '</tr>';
       });
 
@@ -21,9 +22,9 @@ $(document).ready(function() {
     });
   };
 
-  // Show User Info
+  // Show Daily Meals Info
   function showDailyMealsInfo(event) {
-    // jQuery AJAX call for get the user
+    // jQuery AJAX call for get the daily meals
     $.ajax({
       type: 'GET',
       url: '/dailymeals/' + $(this).attr('rel')
@@ -66,6 +67,6 @@ $(document).ready(function() {
     return content;
   }
 
-  // Username link click
+  // DailyMeals name link click
   $('#dailyMeals table tbody').on('click', 'td a.showdailymeals', showDailyMealsInfo);
 });

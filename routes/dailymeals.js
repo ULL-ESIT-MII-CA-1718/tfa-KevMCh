@@ -20,4 +20,31 @@ router.get('/:id', function(req, res) {
   });
 });
 
+/* PUT to update a user */
+router.put('/update/:id', function(req, res) {
+  var date = req.body.date;
+
+  req.checkBody('date', 'El campo de fecha es obligatorio.').notEmpty();
+
+  var errors = req.validationErrors();
+  if(errors) {
+    res.send({ msg: err });
+
+  } else {
+    DailyMeals.update(
+      { _id: req.params.id },
+      { $set:
+        {
+          date: date
+        }
+      },
+      function (err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+      }
+    );
+  }
+});
+
 module.exports = router;

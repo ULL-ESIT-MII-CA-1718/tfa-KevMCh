@@ -7,6 +7,7 @@ var User = require('../models/User');
 var Rol = require('../models/Rol');
 var TypeMeal = require('../models/TypeMeal');
 var Meal = require('../models/Meal');
+var DailyMeals = require('../models/DailyMeals');
 
 var ensureAuthenticated = require('./login').ensureAuthenticated;
 
@@ -149,6 +150,18 @@ router.get('/addmenu', ensureAuthenticated, function(req, res, next) {
 /* GET dailymeals list page. */
 router.get('/dailymealslist', ensureAuthenticated, function(req, res, next) {
   res.render('dailymeals/list');
+});
+
+/* GET page to modify a daily meals. */
+router.get('/modifydailymeals/:id', ensureAuthenticated, function(req, res, next) {
+  var dailymealsToFind = req.params.id;
+
+	DailyMeals.findOne({ '_id' : dailymealsToFind }).
+    exec(function (err, dailyMeals) {
+      if (err) return next(err);
+
+      res.render('dailymeals/modify', { dailyMeals: dailyMeals });
+    });
 });
 
 module.exports = router;
