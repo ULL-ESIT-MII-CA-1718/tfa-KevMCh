@@ -8,32 +8,29 @@ var Rol = require('../models/Rol');
 var TypeMeal = require('../models/TypeMeal');
 var Meal = require('../models/Meal');
 
-function ensureAuthenticated(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	} else {
-		//req.flash('error_msg','You are not logged in');
-		res.redirect('/');
-	}
-}
+var ensureAuthenticated = require('./login').ensureAuthenticated;
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-  res.render('users/login');
+	if(req.isAuthenticated()){
+		res.render('menu');
+	} else {
+		res.render('users/login');
+	}
 });
 
 /* GET menu page. */
-router.get('/menu', function(req, res, next) {
+router.get('/menu', ensureAuthenticated, function(req, res, next) {
   res.render('menu');
 });
 
 /* GET users list page. */
-router.get('/userslist', function(req, res, next) {
+router.get('/userslist', ensureAuthenticated, function(req, res, next) {
   res.render('users/list');
 });
 
 /* GET page to add a user. */
-router.get('/adduser', function(req, res, next) {
+router.get('/adduser', ensureAuthenticated, function(req, res, next) {
   Rol.find(function (err, roles) {
     if (err) return next(err);
     res.render('users/add', { roles: roles });
@@ -41,7 +38,7 @@ router.get('/adduser', function(req, res, next) {
 });
 
 /* GET page to modify a user. */
-router.get('/modifyuser/:id', function(req, res, next) {
+router.get('/modifyuser/:id', ensureAuthenticated, function(req, res, next) {
   var userToFind = req.params.id;
   User.findOne({ '_id' : userToFind }).
     populate('rol').
@@ -106,7 +103,7 @@ router.get('/logout', function(req, res){
 });
 
 /* GET page to add a meal. */
-router.get('/addmeal', function(req, res, next) {
+router.get('/addmeal', ensureAuthenticated, function(req, res, next) {
   TypeMeal.find(function (err, typemeals) {
     if (err) return next(err);
     res.render('meals/add', { typemeals: typemeals });
@@ -114,12 +111,12 @@ router.get('/addmeal', function(req, res, next) {
 });
 
 /* GET meals list page. */
-router.get('/mealslist', function(req, res, next) {
+router.get('/mealslist', ensureAuthenticated, function(req, res, next) {
   res.render('meals/list');
 });
 
 /* GET page to modify a meal. */
-router.get('/modifymeal/:id', function(req, res, next) {
+router.get('/modifymeal/:id', ensureAuthenticated, function(req, res, next) {
   var mealToFind = req.params.id;
   Meal.findOne({ '_id' : mealToFind }).
     populate('types').
@@ -134,7 +131,7 @@ router.get('/modifymeal/:id', function(req, res, next) {
 });
 
 /* GET page to add a menu. */
-router.get('/addmenu', function(req, res, next) {
+router.get('/addmenu', ensureAuthenticated, function(req, res, next) {
 	Meal.find().
     populate('type').
     exec(function (err, meals) {
@@ -150,7 +147,7 @@ router.get('/addmenu', function(req, res, next) {
 });
 
 /* GET dailymeals list page. */
-router.get('/dailymealslist', function(req, res, next) {
+router.get('/dailymealslist', ensureAuthenticated, function(req, res, next) {
   res.render('dailymeals/list');
 });
 

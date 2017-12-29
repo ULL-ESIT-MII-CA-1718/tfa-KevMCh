@@ -9,6 +9,8 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 
+var ensureAuthenticated = require('./routes/login').ensureAuthenticated;
+
 // Database
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/cmsa', { useMongoClient: true });
@@ -76,6 +78,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', index);
+app.use(ensureAuthenticated);
 app.use('/users', users);
 app.use('/meals', meals);
 app.use('/menus', menus);
