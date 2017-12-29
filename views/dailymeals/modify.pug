@@ -2,6 +2,7 @@ extends ../layout
 
 block content
   script(src='/javascripts/dailyMeals/modify.js')
+  script(src='/javascripts/menus/modify.js')
   div(class='row')
     div(class='col-lg-12')
       h2(class='title') Mofidicar comidas del día
@@ -17,11 +18,45 @@ block content
       div#menu
         label Seleccionar menú
         p Almuerzo
-          input(type='radio', name='menu', value='Almuerzo')
+          input(type='radio', name='menu', value=dailyMeals.lunch)
         br
         p Cena
-          input(type='radio', name='menu', value='Cena')
+          input(type='radio', name='menu', value=dailyMeals.dinner)
 
       div
         hr
         button#btnUpdateDate Actualizar fecha
+
+    div#modifyMenu(class='col-lg-4')
+      h4#title
+
+      label Primer plato:
+      br
+      select(multiple)#inputStarters
+        if starters
+          each starter in starters
+            option(value=starter._id) #{starter.name}
+      br
+      label Segundo plato
+      br
+      select(multiple)#inputMainCourses
+        if mainCourses
+          each mainCourse in mainCourses
+            option(value=mainCourse._id) #{mainCourse.name}
+      br
+      label Guarnición:
+      br
+      select(multiple)#inputGarnishs
+        if garnishs
+          each garnish in garnishs
+            option(value=garnish._id) #{garnish.name}
+      br
+      label Postre
+      br
+      select(multiple)#inputDesserts
+        if desserts
+          each dessert in desserts
+            option(value=dessert._id) #{dessert.name}
+
+    div(class='col-lg-2')
+      button#btnUpdateMenu Actualizar menú

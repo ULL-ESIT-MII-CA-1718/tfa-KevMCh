@@ -157,4 +157,51 @@ router.post('/add', function(req, res) {
   }
 });
 
+/* GET a specific menu */
+router.get('/:id', function(req, res) {
+  Menu.findById(req.params.id, function(err, menu) {
+    if(menu) {
+      Menu.getPromiseMealsMenuById(menu).then(function(result) {
+        res.json(result);
+      });
+    }
+  });
+});
+
+/* PUT to update a menu */
+router.put('/update/:id', function(req, res) {
+  var starters = req.body['starters[]'];
+  var mainCourses = req.body['mainCourses[]'];
+  var garnishs = req.body['garnishs[]'];
+  var desserts = req.body['desserts[]'];
+
+  // req.checkBody('starters', 'El campo de primer plato es obligatorio.').notEmpty();
+  // req.checkBody('mainCourses', 'El campo de segundo plato es obligatorio.').notEmpty();
+  // req.checkBody('garnishs', 'El campo de la guarnición es obligatorio.').notEmpty();
+  // req.checkBody('desserts', 'El campo de postre es obligatorio.').notEmpty();
+
+  var errors = req.validationErrors();
+  if(errors) {
+    res.send({ msg: errors });
+
+  } else {
+    Menu.update(
+      { _id: req.params.id },
+      { $set:
+        {
+          starters: starters,
+          mainCourses: mainCourses,
+          garnishs: garnishs,
+          desserts: desserts
+        }
+      },
+      function (err) {
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
+      }
+    );
+  }
+});
+
 module.exports = router;

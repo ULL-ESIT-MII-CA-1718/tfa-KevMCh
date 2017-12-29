@@ -160,7 +160,19 @@ router.get('/modifydailymeals/:id', ensureAuthenticated, function(req, res, next
     exec(function (err, dailyMeals) {
       if (err) return next(err);
 
-      res.render('dailymeals/modify', { dailyMeals: dailyMeals });
+			Meal.find().
+		    populate('type').
+		    exec(function (err, meals) {
+		      if (err) return next(err);
+
+					res.render('dailymeals/modify', {
+						dailyMeals: dailyMeals,
+						starters: meals,
+						mainCourses: meals,
+						garnishs: meals,
+						desserts: meals,
+					});
+		    });
     });
 });
 
