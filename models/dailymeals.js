@@ -36,3 +36,17 @@ module.exports.getDailyMealsById = function(dailymealsToFind, callback) {
 
   Promise.all([specificDailyMeal, lunch, dinner]).then(callback);
 }
+
+module.exports.deleteByID = function(dailymealsToDelete, callback) {
+  DailyMeals.findOne({ '_id' : dailymealsToDelete }).
+    exec(function (err, dailyMeals) {
+      if (err) return next(err);
+
+      var lunch = Menu.remove({ '_id': dailyMeals.lunch });
+      var dinner = Menu.remove({ '_id': dailyMeals.dinner });
+
+      Promise.all([lunch, dinner]).then(() => {
+        DailyMeals.remove({ '_id' : dailymealsToDelete }, callback);
+      });
+  });
+}

@@ -49,8 +49,7 @@ router.put('/update/:id', function(req, res) {
 
 /* DELETE to remove a daily meals */
 router.delete('/delete/:id', function(req, res) {
-  var dailymealsToDelete = req.params.id;
-  DailyMeals.remove({ '_id' : dailymealsToDelete }, function (err) {
+  DailyMeals.deleteByID(req.params.id, function(err) {
     res.send(
         (err === null) ? { msg: '' } : { msg: err }
     );
