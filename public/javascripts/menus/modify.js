@@ -19,9 +19,7 @@ $(document).ready(function() {
         'desserts': $('#updateDailyMeals select#inputDesserts').val()
       }
 
-      console.log(updateMenu)
-
-      // Use AJAX to post the object to our adduser service
+      // Use AJAX to post the object to our update menu service
       $.ajax({
         type: 'PUT',
         data: updateMenu,
@@ -45,8 +43,37 @@ $(document).ready(function() {
     }
   }
 
-  // Update DailyMeals button click
+  // Update Menu button click
   $('#btnUpdateMenu').on('click', updateMenu);
+
+  // Delete Menu
+  function deleteMenu(event) {
+    event.preventDefault();
+
+    // Pop up a confirmation dialog
+    var confirmation = confirm('¿Seguro qué quieres eliminar la comida?');
+
+    // Check and make sure the user confirmed
+    if (confirmation === true) {
+      // If they did, do our delete
+      $.ajax({
+        type: 'DELETE',
+        url: '/menus/delete/' + $('input:radio[name=menu]:checked').val()
+      }).done(function( response ) {
+
+        // Check for a successful (blank) response
+        if (response.msg !== '') {
+          alert('Error: ' + response.msg);
+        }
+      });
+    } else {
+      // If they said no to the confirm, do nothing
+      return false;
+    }
+  }
+
+  // Update Menu button click
+  $('#btnDeleteMenu').on('click', deleteMenu);
 
   $('input[type=radio][name=menu]').change(function() {
     $.ajax({
