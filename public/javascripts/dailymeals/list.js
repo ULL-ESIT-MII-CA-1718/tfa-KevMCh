@@ -14,11 +14,12 @@ $(document).ready(function() {
         tableContent += '<tr>';
         tableContent += '<td><a class="showdailymeals" rel="' + this._id + '">' + this.date + '</a></td>';
         tableContent += '<td><a href="/modifydailymeals/' + this._id + '"><span class="glyphicon glyphicon-pencil modify"></span></a></td>';
+        tableContent += '<td><a class="deletemeal" rel="' + this._id + '"><span class="glyphicon glyphicon-remove remove"></span></a></td>';
         tableContent += '</tr>';
       });
 
       // Inject the whole content string into our existing HTML table
-      $('#dailyMeals table tbody').html(tableContent);
+      $('#dailyMealsList table tbody').html(tableContent);
     });
   };
 
@@ -68,5 +69,37 @@ $(document).ready(function() {
   }
 
   // DailyMeals name link click
-  $('#dailyMeals table tbody').on('click', 'td a.showdailymeals', showDailyMealsInfo);
+  $('#dailyMealsList table tbody').on('click', 'td a.showdailymeals', showDailyMealsInfo);
+
+  // Delete Meal
+  function deleteDailyMeals(event) {
+    event.preventDefault();
+
+    // Pop up a confirmation dialog
+    var confirmation = confirm('¿Seguro qué quieres eliminar las comidas de este día?');
+
+    // Check and make sure the user confirmed
+    if (confirmation === true) {
+      // If they did, do our delete
+      $.ajax({
+        type: 'DELETE',
+        url: '/dailymeals/delete/' + $(this).attr('rel')
+      }).done(function( response ) {
+
+        // Check for a successful (blank) response
+        if (response.msg !== '') {
+          alert('Error: ' + response.msg);
+        }
+
+        // Update the table
+        fillTable();
+      });
+    } else {
+      // If they said no to the confirm, do nothing
+      return false;
+    }
+  };
+
+  // Delete Daily Meals link click
+  $('#dailyMealsList table tbody').on('click', 'td a.deletemeal', deleteDailyMeals);
 });
