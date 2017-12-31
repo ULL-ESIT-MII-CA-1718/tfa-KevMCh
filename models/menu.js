@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Meal = require("./Meal");
+var DailyMeals = require("./DailyMeals");
 
 var menuSchema = Schema({
   _id: Schema.Types.ObjectId,
@@ -32,4 +33,37 @@ module.exports.getPromiseMealsMenuById = function(menu) {
     garnishsList,
     dessertsList
   ]);
+}
+
+module.exports.deleteMenuByID = function(menuIDToDelete, callback) {
+  Menu.remove({ '_id' : menuIDToDelete }, callback);
+  /* Menu.findById(menuIDToDelete, function(err, menu) {
+    if(menu) {
+      console.log(DailyMeals)
+      var lunch = DailyMeals.update(
+        { lunch: menu },
+        { $set:
+          {
+            lunch: ""
+          }
+        }
+      ).exec();
+
+      var dinner = DailyMeals.update(
+        { dinner: menu },
+        { $set:
+          {
+            dinner: ""
+          }
+        }
+      ).exec();
+
+      Promise.all([
+        lunch,
+        dinner
+      ]).then(() => {
+        Menu.remove({ '_id' : menuIDToDelete }, callback);
+      });
+    }
+  }); */
 }

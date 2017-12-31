@@ -206,8 +206,7 @@ router.put('/update/:id', function(req, res) {
 
 /* DELETE to remove a menu */
 router.delete('/delete/:id', function(req, res) {
-  var menuToDelete = req.params.id;
-  Menu.remove({ '_id' : menuToDelete }, function (err) {
+  Menu.deleteMenuByID(req.params.id, function(err) {
     res.send(
         (err === null) ? { msg: '' } : { msg: err }
     );
