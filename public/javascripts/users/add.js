@@ -34,6 +34,9 @@ $(document).ready(function() {
           // Clear the form inputs
           $('#addUser input').val('');
 
+          alert("Usuario creado correctamente.");
+          location.href = "/userslist/";
+
         } else {
           // If something goes wrong, alert the error message that our service returned
           alert('Error: ' + response.msg);

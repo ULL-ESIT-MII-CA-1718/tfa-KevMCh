@@ -35,7 +35,7 @@ $(document).ready(function() {
         // Check for successful (blank) response
         if (response.msg === '') {
           alert("Menú añadido");
-          // window.location.replace("");
+          location.href = "/dailymealslist/";
 
         } else {
           // If something goes wrong, alert the error message that our service returned

@@ -31,7 +31,7 @@ $(document).ready(function() {
         // Check for successful (blank) response
         if (response.msg === '') {
           alert("Comida añadida");
-          // window.location.replace("");
+          location.href = "/mealslist/";
 
         } else {
           // If something goes wrong, alert the error message that our service returned

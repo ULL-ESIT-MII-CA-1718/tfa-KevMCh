@@ -54,7 +54,10 @@ router.post('/add', function(req, res) {
       newMeal.save(function (err) {
         if (err) return handleError(err);
 
-        req.flash('success_msg', 'Comida creado.');
+        req.flash('success_msg', 'Comida creada.');
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
       });
     });
   }

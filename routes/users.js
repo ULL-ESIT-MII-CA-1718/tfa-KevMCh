@@ -55,7 +55,10 @@ router.post('/add', function(req, res) {
 
       User.createUser(newUser, function(err, user){
         if(err) throw err;
-  			console.log(user);
+
+        res.send(
+            (err === null) ? { msg: '' } : { msg: err }
+        );
   		});
 
       req.flash('success_msg', 'Usuario registrado.');

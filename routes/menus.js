@@ -115,6 +115,9 @@ router.post('/add', function(req, res) {
                     if (err) return err;
 
                     req.flash('success_msg', 'Comida del día creada.');
+                    res.send(
+                        (err === null) ? { msg: '' } : { msg: err }
+                    );
                   });
                 } else {
                   if(type === 'Almuerzo') {
