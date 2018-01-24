@@ -26,7 +26,14 @@ router.get('/:id', function(req, res) {
 /* POST to add a meal. */
 router.post('/add', function(req, res) {
   var name = req.body.name;
-  var typesMeal = req.body['typesMeal[]'];
+  var typesMeal = null;
+
+  if(Array.isArray(req.body['typesMeal[]'])) {
+    typesMeal = req.body['typesMeal[]'];
+  } else {
+    typesMeal = new Array();
+    typesMeal.push(req.body['typesMeal[]']);
+  }
 
   req.checkBody('name', 'El campo de nombre es obligatorio.').notEmpty();
   // req.checkBody('typesMeal', 'El campo del tipo es obligatorio.').notEmpty();

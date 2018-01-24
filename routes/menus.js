@@ -10,10 +10,38 @@ var DailyMeals = require('../models/DailyMeals');
 router.post('/add', function(req, res) {
   var date = req.body.date;
   var type = req.body.type;
-  var starters = req.body['starters[]'];
-  var mainCourses = req.body['mainCourses[]'];
-  var garnishs = req.body['garnishs[]'];
-  var desserts = req.body['desserts[]'];
+  var starters = null;
+  var mainCourses = null;
+  var garnishs = null;
+  var desserts = null;
+
+  if(Array.isArray(req.body['starters[]'])) {
+    starters = req.body['starters[]'];
+  } else {
+    starters = new Array();
+    starters.push(req.body['starters[]']);
+  }
+
+  if(Array.isArray(req.body['mainCourses[]'])) {
+    mainCourses = req.body['mainCourses[]'];
+  } else {
+    mainCourses = new Array();
+    mainCourses.push(req.body['mainCourses[]']);
+  }
+
+  if(Array.isArray(req.body['garnishs[]'])) {
+    garnishs = req.body['garnishs[]'];
+  } else {
+    garnishs = new Array();
+    garnishs.push(req.body['garnishs[]']);
+  }
+
+  if(Array.isArray(req.body['desserts[]'])) {
+    desserts = req.body['desserts[]'];
+  } else {
+    desserts = new Array();
+    desserts.push(req.body['desserts[]']);
+  }
 
   req.checkBody('date', 'El campo de fecha es obligatorio.').notEmpty();
   req.checkBody('type', 'El campo de tipo es obligatorio.').notEmpty();
