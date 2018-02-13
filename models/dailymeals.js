@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Menu = require('../models/Menu');
+var Menu = require('./Menu');
 
 var dailymealsSchema = Schema({
   _id: Schema.Types.ObjectId,
