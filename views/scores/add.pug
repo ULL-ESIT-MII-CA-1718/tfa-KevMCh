@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  script(src='/javascripts/scores/add.js')
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Nueva puntuación
+
+  div#addScore(class='row')
+    div(class='col-lg-3 offset-lg-3')
+    div(class='col-lg-3')
+      label Comida:
+      br
+      select#inputMeal
+        option(value="") Seleccione un valor
+        if meals
+          each meal in meals
+            option(value=meal._id) #{meal.name}
+      br
+      label Puntuación:
+      br
+      input#inputPoints(type='number', placeholder='Puntos', step='0.01', min='1' max='5')
+    div(class='col-lg-1')
+
+
+    div(class='col-lg-3')
+      button#btnAddScore Añadir Puntuación

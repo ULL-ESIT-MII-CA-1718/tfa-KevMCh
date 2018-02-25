@@ -181,4 +181,12 @@ router.get('/scoreslist', ensureAuthenticated, function(req, res, next) {
   res.render('scores/list');
 });
 
+/* GET page to add a score. */
+router.get('/addscore', ensureAuthenticated, function(req, res, next) {
+  Meal.find(function (err, meals) {
+    if (err) return next(err);
+    res.render('scores/add', { meals: meals });
+  });
+});
+
 module.exports = router;
