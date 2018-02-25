@@ -49,4 +49,14 @@ router.post('/add', function(req, res) {
   }
 });
 
+/* DELETE to remove a score */
+router.delete('/delete/:id', function(req, res) {
+  var scoreToDelete = req.params.id;
+  Meal.remove({ '_id' : scoreToDelete }, function (err) {
+    res.send(
+        (err === null) ? { msg: '' } : { msg: err }
+    );
+  });
+});
+
 module.exports = router;
