@@ -7,5 +7,5 @@ var scoreSchema = Schema({
   meal: [{ type: Schema.Types.ObjectId, ref: 'Meal' }]
 });
 
-var Score = mongoose.model('Score', mealSchema);
+var Score = mongoose.model('Score', scoreSchema);
 module.exports = Score;

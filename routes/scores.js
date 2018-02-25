@@ -9,6 +9,7 @@ router.get('/', function(req, res) {
   Score.find().
     populate('meal').
     exec(function (err, scores) {
+      console.log(err)
       if (err) return next(err);
 
       res.json(scores);

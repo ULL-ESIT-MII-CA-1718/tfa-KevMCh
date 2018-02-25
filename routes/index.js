@@ -176,4 +176,9 @@ router.get('/modifydailymeals/:id', ensureAuthenticated, function(req, res, next
     });
 });
 
+/* GET scores list page. */
+router.get('/scoreslist', ensureAuthenticated, function(req, res, next) {
+  res.render('scores/list');
+});
+
 module.exports = router;

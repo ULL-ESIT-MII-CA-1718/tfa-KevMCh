@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  script(src='/javascripts/scores/list.js')
+
+  div(class='row')
+    div(class='col-lg-12')
+      h2(class='title') Puntuación de comidas
+
+  div(class='row')
+    div(class='col-lg-1 offset-lg-1')
+    div#scoreList(class='col-lg-5')
+      h2 Listado
+      table
+        thead
+          th Comida
+          th Puntos
+        tbody
