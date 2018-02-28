@@ -9,7 +9,9 @@ CRUD web page to manage the daily meals. This project is created with [NodeJS](h
 
 To use it you have to install the specific tools via npm (_npm install_) and the global _gulp pre-install_. Also, you have install the basic data in MongoDB, _gulp pre-install-db_. If you use _gulp pre-install_ you install the tools and the basic data.
 
-To initialited the databases you have the _gulp start_ command and to stop it _gulp stop_.
+To initialited the databases you have the _gulp start-mongo_ command and to stop it _gulp stop-mongo_.
+
+To start the server use this gulp task, _gulp start-app_
 
 ### Use
 
@@ -19,6 +21,7 @@ After passing the login, you have all the views where you can create, read, modi
 
 * Users
 * Meals
+* Scores
 * Menus
 * Daily meals
 
