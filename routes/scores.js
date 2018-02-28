@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var Score = require('../models/Score');
+var Meal = require('../models/Meal');
 
 /* GET score list. */
 router.get('/', function(req, res) {
