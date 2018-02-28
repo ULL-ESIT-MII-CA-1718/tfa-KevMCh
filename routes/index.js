@@ -8,6 +8,7 @@ var Rol = require('../models/Rol');
 var TypeMeal = require('../models/TypeMeal');
 var Meal = require('../models/Meal');
 var DailyMeals = require('../models/DailyMeals');
+var Scores = require('../models/Score');
 
 var ensureAuthenticated = require('./login').ensureAuthenticated;
 
@@ -187,6 +188,21 @@ router.get('/addscore', ensureAuthenticated, function(req, res, next) {
     if (err) return next(err);
     res.render('scores/add', { meals: meals });
   });
+});
+
+/* GET page to modify a score. */
+router.get('/modifyscore/:id', ensureAuthenticated, function(req, res, next) {
+  var scoreToFind = req.params.id;
+  Scores.findOne({ '_id' : scoreToFind }).
+    populate('meal').
+    exec(function (err, score) {
+      if (err) return next(err);
+
+			Meal.find(function (err, meals) {
+        if (err) return next(err);
+        res.render('scores/modify', { score: score, meals: meals });
+      });
+    });
 });
 
 module.exports = router;

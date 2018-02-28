@@ -60,4 +60,39 @@ router.delete('/delete/:id', function(req, res) {
   });
 });
 
+/* PUT to update a score */
+router.put('/update/:id', function(req, res) {
+  var mealID = req.body.mealID;
+  var points = req.body.points;
+
+  req.checkBody('mealID', 'El campo de comida es obligatorio.').notEmpty();
+  req.checkBody('points', 'El campo de puntuación es obligatorio.').notEmpty();
+
+  var errors = req.validationErrors();
+  if(errors) {
+    res.send({ msg: errors });
+
+  } else {
+    Meal.findOne({ _id: mealID }, function (err, meal) {
+      if (err) return next(err);
+
+      var scoreToUpdate = req.params.id;
+      Score.update(
+        { _id: scoreToUpdate },
+        { $set:
+          {
+            points: points,
+            meal: mealID
+          }
+        },
+        function (err) {
+          res.send(
+              (err === null) ? { msg: '' } : { msg: err }
+          );
+        }
+      );
+    });
+  }
+});
+
 module.exports = router;

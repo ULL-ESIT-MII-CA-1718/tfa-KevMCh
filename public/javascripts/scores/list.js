@@ -14,6 +14,7 @@ $(document).ready(function() {
         tableContent += '<tr>';
         tableContent += '<td>' + this.meal.name + '</td>';
         tableContent += '<td>' + this.points + '</td>';
+        tableContent += '<td><a href="/modifyscore/' + this._id + '"><span class="glyphicon glyphicon-pencil modify"></span></a></td>'
         tableContent += '<td><a class="deletescore" rel="' + this._id + '"><span class="glyphicon glyphicon-remove remove"></span></a></td>';
         tableContent += '</tr>';
       });
