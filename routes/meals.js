@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var TypeMeal = require('../models/TypeMeal');
-var Meal = require('../models/Meal');
+var TypeMeal = require('../models/typemeal');
+var Meal = require('../models/meal');
 
 /* GET meals list. */
 router.get('/', function(req, res) {

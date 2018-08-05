@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var DailyMeals = require('../models/DailyMeals');
+var DailyMeals = require('../models/dailymeals');
 
 /* GET daily meals list. */
 router.get('/', function(req, res) {

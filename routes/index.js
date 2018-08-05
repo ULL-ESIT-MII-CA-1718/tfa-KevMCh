@@ -3,12 +3,14 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/User');
-var Rol = require('../models/Rol');
-var TypeMeal = require('../models/TypeMeal');
-var Meal = require('../models/Meal');
-var DailyMeals = require('../models/DailyMeals');
-var Scores = require('../models/Score');
+var currentPath = process.cwd();
+
+var User = require('../models/user');
+var Rol = require('../models/rol');
+var TypeMeal = require('../models/typemeal');
+var Meal = require('../models/meal');
+var DailyMeals = require('../models/dailymeals');
+var Scores = require('../models/score');
 
 var ensureAuthenticated = require('./login').ensureAuthenticated;
 

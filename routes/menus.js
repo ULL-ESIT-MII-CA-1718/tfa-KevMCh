@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var Meal = require('../models/Meal');
-var Menu = require('../models/Menu');
-var DailyMeals = require('../models/DailyMeals');
+var Meal = require('../models/meal');
+var Menu = require('../models/menu');
+var DailyMeals = require('../models/dailymeals');
 
 /* POST to add a menu. */
 router.post('/add', function(req, res) {

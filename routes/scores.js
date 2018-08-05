@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var Score = require('../models/Score');
-var Meal = require('../models/Meal');
+var Score = require('../models/score');
+var Meal = require('../models/meal');
 
 /* GET score list. */
 router.get('/', function(req, res) {

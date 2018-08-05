@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/User')
-var Rol = require('../models/Rol');
+var User = require('../models/user')
+var Rol = require('../models/rol');
 
 /* GET users list. */
 router.get('/', function(req, res) {
